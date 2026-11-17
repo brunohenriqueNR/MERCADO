@@ -8,11 +8,7 @@ import utils.Utils;
 import java.sql.SQLException;
 import java.util.List;
 
-/**
- * Camada de INTERFACE (terminal).
- * Só lê dados do usuário, chama o Service e mostra os resultados.
- * Nenhuma regra de negócio ou SQL fica aqui.
- */
+
 public class Menu {
 
     private static final String LINHA_DUPLA = "==================================================";
@@ -64,11 +60,12 @@ public class Menu {
 
     private void cadastrarProduto() throws SQLException {
         System.out.println("\n--- Cadastrar Produto ---");
-        String nome = Utils.lerTexto("Nome: ");
+        String descricao = Utils.lerTexto("Descrição: ");
         double preco = Utils.lerDouble("Preço (R$): ");
+        int estoque = Utils.lerInteiro("Estoque: ");
 
         // O id é null porque quem gera o id é o banco
-        Produto produto = new Produto(null, nome, preco);
+        Produto produto = new Produto(null, descricao, preco, estoque);
 
         service.cadastrar(produto);
         System.out.println("Produto cadastrado com sucesso! ID: " + produto.getId());

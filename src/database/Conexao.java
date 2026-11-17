@@ -31,8 +31,9 @@ public class Conexao {
 
             stmt.execute("CREATE TABLE IF NOT EXISTS produtos ("
                     + " id         INTEGER PRIMARY KEY AUTOINCREMENT,"
-                    + " nome       VARCHAR(100) NOT NULL,"
-                    + " preco      REAL NOT NULL)");
+                    + " descricao  VARCHAR(100) NOT NULL,"
+                    + " preco      REAL NOT NULL,"
+                    + " estoque    INTEGER NOT NULL)");
         }
     }
 }

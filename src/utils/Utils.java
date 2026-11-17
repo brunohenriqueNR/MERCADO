@@ -2,12 +2,6 @@ package utils;
 
 import java.util.Scanner;
 
-/**
- * Funções auxiliares para ler dados digitados no terminal.
- *
- * Os métodos são "static": podem ser chamados direto pela classe,
- * sem criar um objeto. Ex.: Utils.lerTexto("Nome: ")
- */
 public class Utils {
 
     // Um único Scanner para todo o programa

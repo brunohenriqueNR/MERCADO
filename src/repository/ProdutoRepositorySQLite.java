@@ -27,15 +27,16 @@ public class ProdutoRepositorySQLite implements ProdutoRepositoryInterface {
 
     @Override
     public void salvar(Produto produto) throws SQLException {
-        String sql = "INSERT INTO produtos (nome, preco) VALUES (?, ?)";
+        String sql = "INSERT INTO produtos (descricao, preco, estoque) VALUES (?, ?, ?)";
         Connection conn = null;
 
         try {
             conn = Conexao.conectar();
             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-            stmt.setString(1, produto.getNome());
+            stmt.setString(1, produto.getDescricao());
             stmt.setDouble(2, produto.getPreco());
+            stmt.setInt(3, produto.getEstoque());
             stmt.executeUpdate();
 
             // Recupera o id gerado pelo banco e coloca no objeto
@@ -66,8 +67,9 @@ public class ProdutoRepositorySQLite implements ProdutoRepositoryInterface {
             while (rs.next()) {
                 produtos.add(new Produto(
                         rs.getInt("id"),
-                        rs.getString("nome"),
-                        rs.getDouble("preco")));
+                        rs.getString("descricao"),
+                        rs.getDouble("preco"),
+                        rs.getInt("estoque")));
             }
             return produtos;
         } catch (SQLException e) {
