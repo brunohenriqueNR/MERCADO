@@ -1,3 +1,4 @@
+
 package database;
 
 import java.sql.Connection;
@@ -13,7 +14,7 @@ import java.sql.Statement;
  */
 public class Conexao {
 
-    // Endereço do banco: "jdbc:sqlite:" + nome do arquivo
+    // Endereço do banco
     private static final String URL = "jdbc:sqlite:estoque.db";
 
     /** Abre e retorna uma conexão com o banco. */
@@ -22,18 +23,25 @@ public class Conexao {
     }
 
     /**
-     * Cria a tabela de produtos.
-     * "IF NOT EXISTS" faz com que nada aconteça se a tabela já existir.
+     * Cria as tabelas de produtos e clientes.
      */
     public static void criarTabela() throws SQLException {
         try (Connection conn = conectar();
              Statement stmt = conn.createStatement()) {
 
+            // Tabela de produtos
             stmt.execute("CREATE TABLE IF NOT EXISTS produtos ("
                     + " id         INTEGER PRIMARY KEY AUTOINCREMENT,"
                     + " descricao  VARCHAR(100) NOT NULL,"
                     + " preco      REAL NOT NULL,"
                     + " estoque    INTEGER NOT NULL)");
+
+            // Tabela de clientes
+            stmt.execute("CREATE TABLE IF NOT EXISTS clientes ("
+                    + " id         INTEGER PRIMARY KEY AUTOINCREMENT,"
+                    + " nome       VARCHAR(100) NOT NULL,"
+                    + " email      VARCHAR(100) NOT NULL,"
+                    + " telefone   VARCHAR(20) NOT NULL)");
         }
     }
 }
